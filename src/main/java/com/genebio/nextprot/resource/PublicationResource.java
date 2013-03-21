@@ -13,7 +13,7 @@ import com.genebio.nextprot.domain.Publication;
 import com.genebio.nextprot.service.PublicationService;
 
 @Service
-@Path("/publication")
+@Path("publication")
 public class PublicationResource {
 
 	@Autowired
@@ -26,9 +26,16 @@ public class PublicationResource {
 	}
 	
 	@GET
-	@Path("/{pid}")
+	@Path("{pid}")
 	@Produces(value = {"application/xml", "application/json"})
 	public Response get(@PathParam("pid") String pid) {
 		return Response.status(200).entity(this.publicationService.getPublicationById(Integer.parseInt(pid))).build();
+	}
+	
+	@GET
+	@Path("/list/{title}")
+	@Produces(value = {"application/json"})
+	public Response getByTitle(@PathParam("title") String title) {
+		return Response.status(200).entity(this.publicationService.getPublicationByTitle("%"+title+"%")).build();
 	}
 }
