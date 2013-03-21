@@ -31,7 +31,6 @@ public class PublicationResource {
 	@Path("{pid}")
 	@Produces(value = {"application/xml", "application/json"})
 	public Response get(@PathParam("pid") String pid) {
-		
 		return Response.status(200).entity(this.publicationService.getPublicationById(Integer.parseInt(pid))).build();
 	}
 	
